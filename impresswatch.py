@@ -1,6 +1,5 @@
 import urllib.request
 import xml.etree.ElementTree as ET
-import datetime
 from datetime import datetime
 import ssl
 import io,sys
