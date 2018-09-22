@@ -54,10 +54,6 @@ for site in siteList:
 
 	count = 0
 	for child in root:
-	
-		for i in child:
-			print (i.tag)
-
 		if count == 0:
 			print("<div style='background-color:" + siteColor + ";'>" + siteName + "</div>")
 			print("<ul>")
