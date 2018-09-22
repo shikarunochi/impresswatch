@@ -1,4 +1,3 @@
-
 import urllib.request
 import xml.etree.ElementTree as ET
 import datetime
@@ -6,8 +5,8 @@ from datetime import datetime
 import ssl
 import io,sys
 
-ssl._create_default_https_context = ssl._create_unverified_context
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+ssl._create_default_https_context = ssl._create_unverified_context 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8') 
 
 MAX_CONTENT = 5
 
@@ -56,26 +55,29 @@ for site in siteList:
 
 	count = 0
 	for child in root:
-		count = count + 1
-		if count == 1:
+	
+		for i in child:
+			print (i.tag)
+
+		if count == 0:
 			print("<div style='background-color:" + siteColor + ";'>" + siteName + "</div>")
 			print("<ul>")
-		elif count > 1 and count <= MAX_CONTENT + 1:
+		elif count > 0 and count <= MAX_CONTENT :
 			title = child[0].text
 			link = child[1].text
 			dateText = child[2].text
 			dateStr = dateText[0:10] + " " + dateText[11:19]
 			linkId = link[-12:]
-			#urlの data より前 + ID + 上4桁 + "/" + 下3桁 + list.jpg"
+			#urlの data より前 + "img/" + ID + "/list/" + 上4桁 + "/" + 下3桁 + "/list.jpg"
 			imageSrc = domain + "img/" + id + "/list/" + linkId[0:4] + "/" + linkId[4:7] + "/list.jpg"
 			
 			if dateStr != None:
 				print("<li>")
 				print("<image src='" + imageSrc + "' width=240 onerror=\"this.style.display='none'\" style='float:left' />")
 				print("<a href='" + link + "'>" + title + "</a><br/>" + " (" + dateStr + ")<div style='clear:both'/></li>" )
-				
 		else:
 			break
+		count = count + 1
 	print("</ul>")
 
 print ("<hr/><p>Twitter:<a href='https://twitter.com/shikarunochi'>@shikarunochi</a></p>")
